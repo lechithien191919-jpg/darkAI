@@ -1,4 +1,4 @@
-import { generateLuauScript } from "./ai_generator.js";
+import { generateLuauScript } from "./ai_generator.js?v=2";
 import { protectLuauScript } from "./obfuscator.js";
 import { uploadScriptToGitHub } from "./github_api.js";
 
