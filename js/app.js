@@ -2,7 +2,7 @@ import { generateLuauScript } from "./ai_generator.js";
 import { protectLuauScript } from "./obfuscator.js";
 import { uploadScriptToGitHub } from "./github_api.js";
 
-const DEFAULT_GEMINI_KEY = "AQ.Ab8RN6Lccng2U01VJ2UbL1EWgHzgl9q6D4KuB9BfsRWgrZBqdA";
+const DEFAULT_GEMINI_KEY = "AQ.Ab8RN6IjBKVwkwlqGcu2cmptu4JPjyEF933w8pHbuWWBTT-_rw";
 
 const els = {
   toggleConfigBtn: document.getElementById("toggleConfigBtn"),
