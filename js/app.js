@@ -1,10 +1,18 @@
-import { protectLuauScript } from "./obfuscator.js";
-import { uploadScriptToGitHub } from "./github_api.js";
-
-const DEFAULT_GEMINI_KEY = "";
-
 async function generateLuauScript(apiKey, userPrompt) {
-  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${encodeURIComponent(apiKey)}`;
+  const cleanKey = apiKey.trim();
+  const isQueryKey = cleanKey.startsWith("AIza");
+
+  const endpoint = isQueryKey
+    ? `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${encodeURIComponent(cleanKey)}`
+    : `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent`;
+
+  const headers = {
+    "Content-Type": "application/json"
+  };
+
+  if (!isQueryKey) {
+    headers["x-goog-api-key"] = cleanKey;
+  }
 
   const systemInstruction = `
 Bạn là DarkAI — trợ lý chuyên gia lập trình Roblox Luau.
@@ -18,7 +26,7 @@ Quy tắc bắt buộc:
 
   const response = await fetch(endpoint, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers,
     body: JSON.stringify({
       systemInstruction: { parts: [{ text: systemInstruction }] },
       contents: [{ role: "user", parts: [{ text: userPrompt }] }],
@@ -31,7 +39,7 @@ Quy tắc bắt buộc:
 
   if (!response.ok) {
     const err = await response.json().catch(() => ({}));
-    throw new Error(err?.error?.message || `Lỗi Gemini API (${response.status})`);
+    throw new Error(err?.error?.message || `Lỗi API (${response.status})`);
   }
 
   const data = await response.json();
