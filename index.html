@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DarkAI — Roblox Luau & Loadstring Studio</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Thanh tiêu đề trên cùng -->
+    <header class="topbar">
+      <div class="brand">
+        <span class="logo-dot"></span>
+        <div>
+          <h1>DarkAI</h1>
+          <p>Roblox Luau Generator &amp; Secure Loadstring</p>
+        </div>
+      </div>
+      <button id="toggleConfigBtn" class="btn-icon" title="Cài đặt API">⚙️ Cấu hình</button>
+    </header>
+
+    <!-- Bảng cấu hình ẩn/hiện gọn gàng -->
+    <section id="configPanel" class="config-panel hidden">
+      <div class="grid-2">
+        <input type="password" id="geminiKey" placeholder="Gemini API Key (AIzaSy...)" />
+        <input type="password" id="githubToken" placeholder="GitHub Token (ghp_... quyền repo)" />
+        <input type="text" id="githubOwner" placeholder="GitHub Username (vd: ThienVN)" />
+        <input type="text" id="githubRepo" placeholder="Tên Repo lưu script (vd: darkai-scripts)" />
+      </div>
+      <div class="config-footer">
+        <div class="toggles">
+          <label class="checkbox">
+            <input type="checkbox" id="enableObfuscate" checked />
+            🛡️ Mã hóa XOR chống soi code
+          </label>
+          <label class="checkbox">
+            <input type="checkbox" id="enableEnvCheck" checked />
+            🔒 Khóa môi trường Roblox
+          </label>
+        </div>
+        <button id="saveConfigBtn" class="btn-save">💾 Lưu cấu hình</button>
+      </div>
+    </section>
+
+    <!-- Khung chat chính với DarkAI -->
+    <main id="chatContainer" class="chat-container">
+      <div class="message ai">
+        <div class="avatar">D</div>
+        <div class="bubble">
+          <p>Chào ông! Tui là <strong>DarkAI</strong> ⚡. Ông muốn làm script Roblox gì cứ nhắn ở dưới, tui sẽ tự viết code Luau, mã hóa bảo mật và xuất <code>loadstring</code> cho ông ngay!</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Thanh nhập yêu cầu dưới đáy -->
+    <footer class="chat-input-bar">
+      <textarea id="promptInput" rows="1" placeholder="Nhắn yêu cầu tạo script cho DarkAI... (VD: Tạo menu GUI bật tắt bay và chạy nhanh)"></textarea>
+      <button id="sendBtn" class="btn-send">Gửi 🚀</button>
+    </footer>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
